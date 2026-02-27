@@ -1,33 +1,36 @@
 # Open Port Scanner
 
-Scans for open ports.
+![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)
 
-# How To Use
+A fast, asynchronous IPv4 port scanner. It probes standard, registered, and private port ranges with high concurrency. Useful for network auditing, identifying exposed services on remote machines, or checking local listeners.
 
-Couple options to run the script/tool.
+## Tech Stack
 
-## Docker
+- **Python 3.12** (Core language)
+- **`asyncio`** (Built-in concurrency)
+- **Docker** (Containerized execution)
+
+## Run In Docker
 
 Best for scanning remote targets or getting an external network perspective.
-Note: when scanning your own host from inside a container, results can differ
-from running locally because Docker uses a separate network namespace and the
-host firewall rules apply differently.
+
+> [!NOTE]
+> Docker uses a separate network namespace and the host firewall rules apply differently.
+> When scanning your own host from inside a container, results can differ
+> from running locally.
 
 ```bash
 # Build the image
-docker build -t py-port-scanner .
+docker build -t open-port-scanner .
 
 # Run container in interactive mode
-docker run -it py-port-scanner
+docker run -it --rm open-port-scanner:latest
 ```
 
-## Local
+## Run Locally
 
 Best for scanning the local machine (full visibility on local listeners).
-Can run locally (needs python):
 
 ```bash
 python main.py
 ```
-
-<!-- Usecase / purpose -->
