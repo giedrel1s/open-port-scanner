@@ -1,3 +1,4 @@
+import sys
 import asyncio
 import ipaddress
 
@@ -39,5 +40,7 @@ if __name__ == "__main__":
 		asyncio.run(main())
 	except KeyboardInterrupt:
 		print("\nScan cancelled by user.")
+		sys.exit(1)
 	except Exception as e:
 		print(f"\nAn error occurred: {e}")
+		sys.exit(1)
