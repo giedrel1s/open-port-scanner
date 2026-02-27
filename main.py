@@ -1,9 +1,8 @@
 import asyncio
 import ipaddress
-from src.port_definitions import PORT_RANGES
-from src.scan_utils import scan_port_range
 
-OPEN_PORTS: list[int] = []
+from port_range import DEFAULT_RANGES
+from port_scanner import PortScanner
 
 
 async def main() -> None:
@@ -17,17 +16,14 @@ async def main() -> None:
 		else:
 			print("Invalid IPv4 address.", flush=True)
 
-	for item in PORT_RANGES:
-		await scan_port_range(item, target_ip, cache_port)
+	scanner = PortScanner(target_ip)
 
-	print(f"\nOpen ports: {OPEN_PORTS}")
+	for port_range in DEFAULT_RANGES:
+		scanner.register_range(port_range)
 
+	open_ports = await scanner.scan()
 
-def cache_port(port: int, cache: list[int] | None = None) -> None:
-	if cache is None:
-		cache = OPEN_PORTS
-
-	cache.append(port)
+	print(f"\nOpen ports: {open_ports}")
 
 
 def validate_ip(target: str) -> bool:
