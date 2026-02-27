@@ -1,0 +1,10 @@
+.venv
+
+Makefile
+Dockerfile
+
+.dockerignore
+.gitignore
+.python-version
+
+*.md
